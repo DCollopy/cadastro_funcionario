@@ -32,6 +32,22 @@ public abstract class Usuario {
             Logger.getLogger("USUARIO").info("Sobrenome invalido");
             throw new IllegalArgumentException("Sobrenome invalido");
         }
+        if(cpf == null){
+            Logger.getLogger("USUARIO").info("CPF invalido");
+            throw new IllegalArgumentException("CPF invalido");
+        }
+        if(email == null){
+            Logger.getLogger("USUARIO").info("Email invalido");
+            throw new IllegalArgumentException("Email invalido");
+        }
+        if(telefone == null){
+            Logger.getLogger("USUARIO").info("Telefone invalido");
+            throw new IllegalArgumentException("Telefone invalido");
+        }
+        if(endereco == null){
+            Logger.getLogger("USUARIO").info("Endereco invalido");
+            throw new IllegalArgumentException("Endereco invalido");
+        }
 
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -49,6 +65,22 @@ public abstract class Usuario {
         if(sobrenome == null || sobrenome.trim().equals("")){
             Logger.getLogger("USUARIO").info("Sobrenome invalido");
             throw new IllegalArgumentException("Sobrenome invalido");
+        }
+        if(cpf == null){
+            Logger.getLogger("USUARIO").info("CPF invalido");
+            throw new IllegalArgumentException("CPF invalido");
+        }
+        if(email == null){
+            Logger.getLogger("USUARIO").info("Email invalido");
+            throw new IllegalArgumentException("Email invalido");
+        }
+        if(telefone == null){
+            Logger.getLogger("USUARIO").info("Telefone invalido");
+            throw new IllegalArgumentException("Telefone invalido");
+        }
+        if(endereco == null){
+            Logger.getLogger("USUARIO").info("Endereco invalido");
+            throw new IllegalArgumentException("Endereco invalido");
         }
         this.cpf = cpf;
         this.nome = nome;
