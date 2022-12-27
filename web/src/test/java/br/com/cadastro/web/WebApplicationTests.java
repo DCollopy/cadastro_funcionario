@@ -1,4 +1,4 @@
-package com.br.web;
+package br.com.cadastro.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

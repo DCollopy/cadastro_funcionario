@@ -1,4 +1,4 @@
-package com.br.web;
+package br.com.cadastro.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
