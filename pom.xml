@@ -5,7 +5,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>domain</module>
-        <module>web</module>
     </modules>
     <groupId>com.br</groupId>
     <artifactId>cadastro_funcionario</artifactId>
