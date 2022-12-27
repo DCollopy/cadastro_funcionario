@@ -7,7 +7,6 @@
         <artifactId>cadastro_funcionario</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>br.com.gestao_escola</groupId>
     <artifactId>web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>web</name>
@@ -62,18 +61,6 @@
         <dependency>
             <groupId>com.br</groupId>
             <artifactId>dominio</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.com</groupId>
-            <artifactId>persistencia</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gestao_escola</groupId>
-            <artifactId>Kafka</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
