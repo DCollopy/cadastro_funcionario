@@ -1,7 +1,6 @@
 package br.com.cadastro.domain.entities.objetos;
 
 import lombok.Data;
-
 import java.util.logging.Logger;
 
 @Data

@@ -16,7 +16,7 @@ public class Telefone {
             Logger.getLogger("TELEFONE").info("DDD invalido");
             throw new IllegalArgumentException("DDD inválido");
         }
-        if(numero_telefone == null || !numero_telefone.matches("\\d{4}-\\d{4}")) {
+        if(numero_telefone == null || !numero_telefone.matches("^(\\d{4}-?\\d{4})$")) {
             Logger.getLogger("TELEFONE").info("Numero invalido");
             throw new IllegalArgumentException("Número de telefone inválido");
         }

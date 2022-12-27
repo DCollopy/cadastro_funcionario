@@ -15,8 +15,9 @@ public class Endereco {
 
     private String cidade;
 
+    private Cep cep;
 
-    public Endereco(String rua, String numero_endereco, String bairro, String cidade) {
+    public Endereco(String rua, String numero_endereco, String bairro, String cidade, Cep cep) {
         if(rua == null || rua.trim().equals("")){
             Logger.getLogger("ENDEREÇO").info("Rua invalida");
             throw new IllegalArgumentException("Rua invalida");
@@ -38,5 +39,6 @@ public class Endereco {
         this.numero_endereco = numero_endereco;
         this.bairro = bairro;
         this.cidade = cidade;
+        this.cep = cep;
     }
 }
