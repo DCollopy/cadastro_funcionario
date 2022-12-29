@@ -2,10 +2,14 @@ package br.com.cadastro.domain.entities;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class RelatorioMensal {
 
     private final String titulo = "Relatorio Mensal";
+
+    private final LocalDate mesRelatorio = LocalDate.now();
 
     private Funcionario funcionario;
 
