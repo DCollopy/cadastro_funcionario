@@ -1,4 +1,4 @@
-package br.com.cadastro.domain.usecases;
+package br.com.cadastro.usecases;
 
 public class RelatorioMensalValidaTeste  extends RelatorioMensalValida{
 }

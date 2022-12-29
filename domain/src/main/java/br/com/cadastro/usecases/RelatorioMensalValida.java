@@ -1,11 +1,11 @@
-package br.com.cadastro.domain.usecases;
+package br.com.cadastro.usecases;
 
 import br.com.cadastro.domain.entities.RelatorioMensal;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
-import static br.com.cadastro.domain.usecases.CalculoInss.calculaInss;
+import static br.com.cadastro.usecases.CalculoInss.calculaInss;
 
 public abstract class RelatorioMensalValida {
     private final LocalDate mesRelatorio = LocalDate.now();
