@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>domain</module>
+        <module>dominio</module>
     </modules>
     <groupId>com.br</groupId>
     <artifactId>cadastro_funcionario</artifactId>
