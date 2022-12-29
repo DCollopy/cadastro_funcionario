@@ -13,6 +13,8 @@ public class Funcionario extends Usuario {
 
     private Salario salario_bruto;
 
+    private int dependentes = 0;
+
     public Funcionario(){
         super();
     }
@@ -20,7 +22,7 @@ public class Funcionario extends Usuario {
             , Cpf cpf, Email email, Telefone telefone
             , Endereco endereco, String cargo
             , CarteiraTrabalho carteiraTrabalho
-            , Pis pis, Salario salario_bruto) {
+            , Pis pis, Salario salario_bruto, int dependentes) {
         super(nome, sobrenome, cpf, email, telefone, endereco, cargo);
 
         if(carteiraTrabalho == null || pis == null || salario_bruto == null) {
@@ -31,6 +33,7 @@ public class Funcionario extends Usuario {
         this.carteiraTrabalho = carteiraTrabalho;
         this.pis = pis;
         this.salario_bruto = salario_bruto;
+        this.dependentes = dependentes;
     }
 
     @Override

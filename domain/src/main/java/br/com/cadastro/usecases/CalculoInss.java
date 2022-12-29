@@ -1,5 +1,8 @@
 package br.com.cadastro.usecases;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static br.com.cadastro.domain.entities.objetos.Inss.*;
 
 public class CalculoInss {
@@ -19,7 +22,12 @@ public class CalculoInss {
         } else if (salarioBruto > inss_valor_terceiro && salarioBruto <= inss_valor_maximo) {
             valor = salarioBruto - inss_valor_terceiro;
             inss = (valor * inss_tabela4) + inss_deducao1 + inss_deducao2 + inss_deducao3;
+        } else {
+            valor = salarioBruto - inss_valor_maximo;
+            inss = (valor * inss_tabela4) + inss_deducao1 + inss_deducao2 + inss_deducao3;
         }
-        return inss;
+
+        BigDecimal bd = new BigDecimal(inss).setScale(3, RoundingMode.HALF_EVEN);
+        return bd.doubleValue();
     }
 }

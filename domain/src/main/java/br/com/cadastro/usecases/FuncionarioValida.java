@@ -12,7 +12,7 @@ public abstract class FuncionarioValida {
                     , funcionario.getCpf(), funcionario.getEmail(), funcionario.getTelefone()
                     , funcionario.getEndereco(), funcionario.getCargo()
                     , funcionario.getCarteiraTrabalho(), funcionario.getPis()
-                    , funcionario.getSalario_bruto());
+                    , funcionario.getSalario_bruto(), funcionario.getDependentes());
             Logger.getLogger("FUNCIONARIO").info("Funcionario criado com sucesso");
             return func;
         }catch (Exception e){
@@ -27,7 +27,7 @@ public abstract class FuncionarioValida {
                     , funcionario.getCpf(), funcionario.getEmail(), funcionario.getTelefone()
                     , funcionario.getEndereco(), funcionario.getCargo()
                     , funcionario.getCarteiraTrabalho(), funcionario.getPis()
-                    , funcionario.getSalario_bruto());
+                    , funcionario.getSalario_bruto(), funcionario.getDependentes());
             Logger.getLogger("FUNCIONARIO").info("Funcionario editado com sucesso");
             return func;
         }catch (Exception e){

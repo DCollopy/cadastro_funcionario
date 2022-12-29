@@ -1,6 +1,6 @@
 package br.com.cadastro.domain.entities.objetos;
 
-public record Fgts() {
+public record Irrf() {
 
     /*
     * Imposto de Renda
@@ -16,22 +16,30 @@ public record Fgts() {
       Podem ser considerados como dependentes: cônjuge, filhos até 21 anos, pais e avós (desde que não tenham rendimento).
     * Valor IRRF = (salário base * alíquota) – taxa - numero*(dependente)*/
 
-    private static final double fgts_tabela1 = 0.075;
+    public static final double irrf_tabela1 = 0.075;
 
-    private static final double fgts_tabela2 = 0.15;
+    public static final double irrf_tabela2 = 0.15;
 
-    private static final double fgts_tabela3 = 0.225;
+    public static final double irrf_tabela3 = 0.225;
 
-    private static final double fgts_tabela4 = 0.275;
+    public static final double irrf_tabela4 = 0.275;
 
-    private static final double fgts_taxa1 = 142.80;
+    public static final double irrf_taxa1 = 142.80;
 
-    private static final double fgts_taxa2 = 354.80;
+    public static final double irrf_taxa2 = 354.80;
 
-    private static final double fgts_taxa3 = 636.13;
+    public static final double irrf_taxa3 = 636.13;
 
-    private static final double fgts_taxa4 = 869.36;
+    public static final double irrf_taxa4 = 869.36;
 
-    private static final double fgts_dependente = 189.59;
+    public static final double irrf_dependente = 189.59;
+
+    public static final double valor_minimo = 1903.98;
+
+    public static final double valor_um = 2826.65;
+
+    public static final double valor_dois = 3751.05;
+
+    public static final double valor_maximo= 4664.68;
 
 }
