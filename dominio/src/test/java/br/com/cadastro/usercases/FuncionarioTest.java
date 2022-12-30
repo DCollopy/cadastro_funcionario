@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FuncionarioTeste {
+public class FuncionarioTest {
 
     protected FuncionarioValidaTeste funcionarioValidaTeste = new FuncionarioValidaTeste();
 

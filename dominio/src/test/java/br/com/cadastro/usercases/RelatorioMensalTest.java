@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
-public class RelatorioMensalTeste {
+public class RelatorioMensalTest {
 
     protected RelatorioMensalValidaTeste relatorioMensalValidaTeste = new RelatorioMensalValidaTeste();
 
