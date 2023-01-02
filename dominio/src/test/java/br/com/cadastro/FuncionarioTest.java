@@ -1,4 +1,4 @@
-package br.com.cadastro.usercases;
+package br.com.cadastro;
 
 import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.entidade.objetos.*;

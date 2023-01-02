@@ -8,6 +8,7 @@ import static br.com.cadastro.dominio.entidade.objetos.Inss.*;
 
 public class CalculoInss implements ICalculoInss {
 
+    @Override
     public double calculaInss(double salarioBruto) {
         double inss = 0;
         double valor;
@@ -32,6 +33,7 @@ public class CalculoInss implements ICalculoInss {
         return bd.doubleValue();
     }
 
+    @Override
     public double calculaDescontoInss(double salarioBruto) {
         if (salarioBruto > 0) {
             return calculaInss(salarioBruto);

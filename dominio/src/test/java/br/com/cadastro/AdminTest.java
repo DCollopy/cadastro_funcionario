@@ -1,15 +1,15 @@
-package br.com.cadastro.usercases;
+package br.com.cadastro;
 
 import br.com.cadastro.dominio.entidade.Admin;
 import br.com.cadastro.dominio.entidade.objetos.*;
-import br.com.cadastro.dominio.usecases.AdminValida;
+import br.com.cadastro.dominio.usecases.teste.AdminValidaTeste;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AdminTest {
 
-    protected AdminValida.AdminValidaTeste adminValidaTeste = new AdminValida.AdminValidaTeste();
+    protected AdminValidaTeste adminValidaTeste = new AdminValidaTeste();
 
     Admin admin = new Admin("Katia","Santos"
             , new Cpf("123.456.789-10"), new Email("katias@email.com")

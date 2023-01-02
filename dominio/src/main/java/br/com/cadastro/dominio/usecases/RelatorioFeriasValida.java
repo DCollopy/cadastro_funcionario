@@ -5,11 +5,11 @@ import br.com.cadastro.dominio.entidade.RelatorioFerias;
 import java.util.logging.Logger;
 
 public abstract class RelatorioFeriasValida {
-    private ICalculoInss calculoINSS;
-    private ICaculoIrrf calculoIRRF;
-    private ICalculoFerias calculoFerias;
-    private ICalculoDesconto calculoDesconto;
-    private ICalculoSalarioLiquido calculoSalario;
+    private final ICalculoInss calculoINSS = new CalculoInss();
+    private final ICaculoIrrf calculoIRRF = new CalculoIrrf();
+    private final ICalculoFerias calculoFerias = new CalculoFerias();
+    private final ICalculoDesconto calculoDesconto = new CalculoDesconto();
+    private final ICalculoSalarioLiquido calculoSalario = new CalculoSalarioLiquido();
 
     public RelatorioFerias criaRelatorioFerias(RelatorioFerias relatorioFerias){
         try {

@@ -7,11 +7,10 @@ import java.util.logging.Logger;
 
 public abstract class RelatorioMensalValida {
     private final LocalDate mesRelatorio = LocalDate.now();
-    private  ICaculoIrrf calculoIRRF;
-    private  CalculoInss calculoINSS;
-    private  ICalculoDesconto calculoDesconto;
-    private  ICalculoSalarioLiquido calculoSalario;
-
+    private final ICalculoInss calculoINSS = new CalculoInss();
+    private final ICaculoIrrf calculoIRRF = new CalculoIrrf();
+    private final ICalculoDesconto calculoDesconto = new CalculoDesconto();
+    private final ICalculoSalarioLiquido calculoSalario = new CalculoSalarioLiquido();
 
     public boolean validaExiteRelatorioGerado(RelatorioMensal relatorioMensal) {
         if (relatorioMensal.getMesRelatorio()
@@ -25,13 +24,15 @@ public abstract class RelatorioMensalValida {
 
     public RelatorioMensal criaRelatorioMensal(RelatorioMensal relatorioMensal) {
         try {
+            double salarioBruto = relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto();
+            validaSalarioBruto(salarioBruto);
 
-            relatorioMensal.setDescontoInss(calculoINSS.calculaDescontoInss(relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto()));
-            relatorioMensal.setDescontoIrrf(calculoIRRF.calculoImpostoRenda(relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto(), relatorioMensal.getFuncionario().getDependentes(), relatorioMensal.getDescontoInss()));
+            relatorioMensal.setDescontoInss(calculoINSS.calculaDescontoInss(salarioBruto));
+            relatorioMensal.setDescontoIrrf(calculoIRRF.calculoImpostoRenda(salarioBruto, relatorioMensal.getFuncionario().getDependentes(), relatorioMensal.getDescontoInss()));
             relatorioMensal.setDescontoTotal(calculoDesconto.somaDescontos(relatorioMensal.getDescontoInss(), relatorioMensal.getDescontoIrrf()));
-            relatorioMensal.setSalarioLiquido(calculoSalario.calculaSalarioLiquido(relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto(), relatorioMensal.getDescontoTotal(), relatorioMensal.getOutrosDescontos()));
+            relatorioMensal.setSalarioLiquido(calculoSalario.calculaSalarioLiquido(salarioBruto, relatorioMensal.getDescontoTotal(), relatorioMensal.getOutrosDescontos()));
 
-            RelatorioMensal relatorio =new RelatorioMensal(relatorioMensal.getFuncionario()
+            RelatorioMensal relatorio = new RelatorioMensal(relatorioMensal.getFuncionario()
                     , relatorioMensal.getDescontoInss()
                     , relatorioMensal.getDescontoIrrf()
                     , relatorioMensal.getDescontoTotal()
@@ -57,6 +58,13 @@ public abstract class RelatorioMensalValida {
         } catch (Exception e) {
             Logger.getLogger("RELATORIO MENSAL").info("Erro ao Editar Relatorio Mensal");
             throw new IllegalArgumentException("Erro ao editar relatorio mensal");
+        }
+    }
+
+    private void validaSalarioBruto(double salarioBruto) {
+        if(salarioBruto < 0){
+            Logger.getLogger("Salário bruto inválido");
+            throw new IllegalArgumentException("Erro ao calcular férias - Salário bruto inválido");
         }
     }
 }

@@ -39,4 +39,14 @@ public class RelatorioFerias {
         this.outrosDescontos = outrosDescontos;
         this.observacoes = observacoes;
     }
+
+    public RelatorioFerias(Funcionario funcionario, double outrosDescontos, String observacoes) {
+        if(funcionario == null){
+            Logger.getLogger("RELATORIO MENSAL").info("Funcionario Invalido");
+            throw new IllegalArgumentException("Funcionario Invalido");
+        }
+        this.funcionario = funcionario;
+        this.outrosDescontos = outrosDescontos;
+        this.observacoes = observacoes;
+    }
 }
