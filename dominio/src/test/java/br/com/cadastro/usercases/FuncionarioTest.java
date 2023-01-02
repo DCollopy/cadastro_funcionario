@@ -2,7 +2,7 @@ package br.com.cadastro.usercases;
 
 import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.entidade.objetos.*;
-import br.com.cadastro.dominio.usecases.FuncionarioValidaTeste;
+import br.com.cadastro.dominio.usecases.teste.FuncionarioValidaTeste;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

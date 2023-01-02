@@ -2,12 +2,13 @@ package br.com.cadastro.dominio.usecases;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.logging.Logger;
 
 import static br.com.cadastro.dominio.entidade.objetos.Inss.*;
 
-public class CalculoInss {
+public class CalculoInss implements ICalculoInss {
 
-    public static double calculaInss(double salarioBruto) {
+    public double calculaInss(double salarioBruto) {
         double inss = 0;
         double valor;
 
@@ -29,5 +30,14 @@ public class CalculoInss {
 
         BigDecimal bd = new BigDecimal(inss).setScale(3, RoundingMode.HALF_EVEN);
         return bd.doubleValue();
+    }
+
+    public double calculaDescontoInss(double salarioBruto) {
+        if (salarioBruto > 0) {
+            return calculaInss(salarioBruto);
+        } else {
+            Logger.getLogger("RELATORIOS").info("Salario Bruto Invalido");
+            throw new IllegalArgumentException("Salario Bruto Invalido");
+        }
     }
 }

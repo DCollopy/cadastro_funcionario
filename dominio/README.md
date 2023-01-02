@@ -5,7 +5,7 @@ Criar um relatorio baseado em calculos de salario, onde o empresario posso subir
 
 
 * Classes Dominio 
-![img.png](../image/img_dominio.png)
+![img_1.png](img_1.png)
 
   
 * Caso de Uso
@@ -13,4 +13,5 @@ Criar um relatorio baseado em calculos de salario, onde o empresario posso subir
 
 
 * Diagrama de Classe
-* ![img.png](../image/img.png)
+![img.png](img.png)
+

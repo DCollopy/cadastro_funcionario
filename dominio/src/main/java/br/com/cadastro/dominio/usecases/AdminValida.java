@@ -33,4 +33,6 @@ public abstract class AdminValida {
             throw new IllegalArgumentException("Admin nao atualizado");
         }
     }
+
+    public static class AdminValidaTeste extends AdminValida{ }
 }

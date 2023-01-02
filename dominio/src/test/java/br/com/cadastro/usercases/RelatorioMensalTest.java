@@ -3,7 +3,7 @@ package br.com.cadastro.usercases;
 import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
 import br.com.cadastro.dominio.entidade.objetos.*;
-import br.com.cadastro.dominio.usecases.RelatorioMensalValidaTeste;
+import br.com.cadastro.dominio.usecases.teste.RelatorioMensalValidaTeste;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;

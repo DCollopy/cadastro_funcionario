@@ -2,12 +2,12 @@ package br.com.cadastro.dominio.usecases;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.logging.Logger;
 
 import static br.com.cadastro.dominio.entidade.objetos.Irrf.*;
 
-public class CalculoIrrf {
-
-    public static double calculoIRRF(double salarioBruto, int dependentes) {
+public class CalculoIrrf implements ICaculoIrrf {
+    public double calculaIRRF(double salarioBruto, int dependentes) {
         double imposto = 0;
 
         if (dependentes > 0) {
@@ -27,5 +27,18 @@ public class CalculoIrrf {
 
         BigDecimal bd = new BigDecimal(imposto).setScale(3, RoundingMode.HALF_EVEN);
         return bd.doubleValue();
+    }
+
+    public double calculoImpostoRenda(double salarioBruto, int dependentes, double inss) {
+        if (salarioBruto < 0) {
+            Logger.getLogger("RELATORIOS").info("Salario Bruto Invalido");
+            throw new IllegalArgumentException("Salario Bruto Invalido");
+        }
+        if (inss < 0) {
+            Logger.getLogger("RELATORIOS").info("Desconto INSS Invalido");
+            throw new IllegalArgumentException("Desconto INSS Invalido");
+        }
+        double salario = salarioBruto - inss;
+        return calculaIRRF(salario, dependentes);
     }
 }
