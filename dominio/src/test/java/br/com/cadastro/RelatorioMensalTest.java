@@ -6,6 +6,8 @@ import br.com.cadastro.dominio.entidade.objetos.*;
 import br.com.cadastro.dominio.usecases.teste.RelatorioMensalValidaTeste;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 public class RelatorioMensalTest {
@@ -17,7 +19,8 @@ public class RelatorioMensalTest {
             , new Email("teste@email.com")
             , new Telefone("12", "12345678")
             , new Endereco("Rua teste", "123", "Bairro teste", "Cidade teste", new Cep("13456-780"))
-            ,"Gerente", new CarteiraTrabalho("12345678910"), new Pis("12345678910"), new Salario(10000.00),2);
+            ,"Gerente", new CarteiraTrabalho("12345678910")
+            , new Pis("12345678910"), new Salario(10000.00),2, LocalDate.of(2020, 1, 1));
 
     RelatorioMensal relatorioMensal = new RelatorioMensal(funcionario, 100.00, "Teste");
 

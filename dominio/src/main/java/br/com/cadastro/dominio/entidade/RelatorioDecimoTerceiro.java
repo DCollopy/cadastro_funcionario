@@ -9,11 +9,11 @@ public class RelatorioDecimoTerceiro {
 
     private Funcionario funcionario;
 
+    private double salarioBrutoDecimoTerceiro;
+
     private double descontoIrrf;
 
     private double descontoInss;
-
-    private int beneficiarios;
 
     private double descontoTotal;
 
@@ -23,17 +23,27 @@ public class RelatorioDecimoTerceiro {
 
     private String observacoes;
 
-    public RelatorioDecimoTerceiro(){}
+    public RelatorioDecimoTerceiro() {
+    }
+
     public RelatorioDecimoTerceiro(Funcionario funcionario, double descontoIrrf
-            , double descontoInss, int beneficiarios
-            , double descontoTotal, double salarioLiquido
+            , double descontoInss, double descontoTotal, double salarioLiquido
             , double outrosDescontos, String observacoes) {
         this.funcionario = funcionario;
         this.descontoIrrf = descontoIrrf;
         this.descontoInss = descontoInss;
-        this.beneficiarios = beneficiarios;
         this.descontoTotal = descontoTotal;
         this.salarioLiquido = salarioLiquido;
+        this.outrosDescontos = outrosDescontos;
+        this.observacoes = observacoes;
+    }
+
+    public RelatorioDecimoTerceiro(double salarioBrutoDecimoTerceiro) {
+        this.salarioBrutoDecimoTerceiro = salarioBrutoDecimoTerceiro;
+    }
+
+    public RelatorioDecimoTerceiro(Funcionario funcionario, double outrosDescontos, String observacoes) {
+        this.funcionario = funcionario;
         this.outrosDescontos = outrosDescontos;
         this.observacoes = observacoes;
     }

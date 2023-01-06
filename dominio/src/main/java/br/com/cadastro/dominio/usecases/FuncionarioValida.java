@@ -9,10 +9,11 @@ public abstract class FuncionarioValida {
     public Funcionario criaFuncionario(Funcionario funcionario){
         try{
             Funcionario func = new Funcionario(funcionario.getNome(), funcionario.getSobrenome()
-                    , funcionario.getCpf(), funcionario.getEmail(), funcionario.getTelefone()
-                    , funcionario.getEndereco(), funcionario.getCargo()
-                    , funcionario.getCarteiraTrabalho(), funcionario.getPis()
-                    , funcionario.getSalario_bruto(), funcionario.getDependentes());
+                    , funcionario.getCpf(), funcionario.getEmail()
+                    , funcionario.getTelefone(), funcionario.getEndereco()
+                    , funcionario.getCargo(), funcionario.getCarteiraTrabalho()
+                    , funcionario.getPis(), funcionario.getSalario_bruto()
+                    , funcionario.getDependentes(), funcionario.getData_admissao());
             Logger.getLogger("FUNCIONARIO").info("Funcionario criado com sucesso");
             return func;
         }catch (Exception e){
@@ -24,10 +25,11 @@ public abstract class FuncionarioValida {
     public Funcionario editaFuncionario(Funcionario funcionario){
         try{
             Funcionario func = new Funcionario(funcionario.getNome(), funcionario.getSobrenome()
-                    , funcionario.getCpf(), funcionario.getEmail(), funcionario.getTelefone()
-                    , funcionario.getEndereco(), funcionario.getCargo()
-                    , funcionario.getCarteiraTrabalho(), funcionario.getPis()
-                    , funcionario.getSalario_bruto(), funcionario.getDependentes());
+                    , funcionario.getCpf(), funcionario.getEmail()
+                    , funcionario.getTelefone(), funcionario.getEndereco()
+                    , funcionario.getCargo(), funcionario.getCarteiraTrabalho()
+                    , funcionario.getPis(), funcionario.getSalario_bruto()
+                    , funcionario.getDependentes(), funcionario.getData_admissao());
             Logger.getLogger("FUNCIONARIO").info("Funcionario editado com sucesso");
             return func;
         }catch (Exception e){

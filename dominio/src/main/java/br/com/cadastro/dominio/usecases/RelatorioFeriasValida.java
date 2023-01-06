@@ -14,7 +14,7 @@ public abstract class RelatorioFeriasValida {
     public RelatorioFerias criaRelatorioFerias(RelatorioFerias relatorioFerias){
         try {
             double salarioBruto = relatorioFerias.getFuncionario().getSalario_bruto().getSalario_bruto();
-            validaSalarioBruto(salarioBruto);
+            calculoSalario.validaSalarioBruto(salarioBruto);
 
             relatorioFerias.setSalarioBrutoFerias(calculoFerias.calculaFerias(salarioBruto));
             relatorioFerias.setDescontoInss(calculoINSS.calculaDescontoInss(salarioBruto));
@@ -35,12 +35,6 @@ public abstract class RelatorioFeriasValida {
         } catch (Exception e) {
             Logger.getLogger("Erro ao calcular férias");
             throw new IllegalArgumentException("Erro ao calcular férias");
-        }
-    }
-    private void validaSalarioBruto(double salarioBruto) {
-        if(salarioBruto < 0){
-            Logger.getLogger("Salário bruto inválido");
-            throw new IllegalArgumentException("Erro ao calcular férias - Salário bruto inválido");
         }
     }
 }

@@ -25,7 +25,7 @@ public abstract class RelatorioMensalValida {
     public RelatorioMensal criaRelatorioMensal(RelatorioMensal relatorioMensal) {
         try {
             double salarioBruto = relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto();
-            validaSalarioBruto(salarioBruto);
+            calculoSalario.validaSalarioBruto(salarioBruto);
 
             relatorioMensal.setDescontoInss(calculoINSS.calculaDescontoInss(salarioBruto));
             relatorioMensal.setDescontoIrrf(calculoIRRF.calculoImpostoRenda(salarioBruto, relatorioMensal.getFuncionario().getDependentes(), relatorioMensal.getDescontoInss()));
@@ -58,13 +58,6 @@ public abstract class RelatorioMensalValida {
         } catch (Exception e) {
             Logger.getLogger("RELATORIO MENSAL").info("Erro ao Editar Relatorio Mensal");
             throw new IllegalArgumentException("Erro ao editar relatorio mensal");
-        }
-    }
-
-    private void validaSalarioBruto(double salarioBruto) {
-        if(salarioBruto < 0){
-            Logger.getLogger("Salário bruto inválido");
-            throw new IllegalArgumentException("Erro ao calcular férias - Salário bruto inválido");
         }
     }
 }

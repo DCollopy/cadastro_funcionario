@@ -34,5 +34,4 @@ public abstract class AdminValida {
         }
     }
 
-    public static class AdminValidaTeste extends AdminValida{ }
 }
