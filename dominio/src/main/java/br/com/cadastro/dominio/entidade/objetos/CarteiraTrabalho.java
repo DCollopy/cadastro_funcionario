@@ -18,4 +18,6 @@ public class CarteiraTrabalho {
 
         this.numero_trabalho = numero_trabalho;
     }
+
+    public CarteiraTrabalho() {}
 }
