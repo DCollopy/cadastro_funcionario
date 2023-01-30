@@ -5,16 +5,19 @@ import br.com.cadastro.dominio.entidade.objetos.Email;
 import br.com.cadastro.dominio.entidade.objetos.Endereco;
 import br.com.cadastro.dominio.entidade.objetos.Telefone;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public abstract class Usuario {
-    private Cpf cpf;
+
     private String nome;
 
     private String sobrenome;
 
+    private Cpf cpf;
     private Email email;
 
     private Telefone telefone;
@@ -92,4 +95,8 @@ public abstract class Usuario {
     }
 
     public abstract String getCargo(String cargo);
+
+    public Cpf getCpf() {
+        return cpf;
+    }
 }

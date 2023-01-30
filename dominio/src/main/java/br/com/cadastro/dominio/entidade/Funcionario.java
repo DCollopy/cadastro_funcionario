@@ -2,11 +2,13 @@ package br.com.cadastro.dominio.entidade;
 
 import br.com.cadastro.dominio.entidade.objetos.*;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public class Funcionario extends Usuario {
 
     private CarteiraTrabalho carteiraTrabalho;

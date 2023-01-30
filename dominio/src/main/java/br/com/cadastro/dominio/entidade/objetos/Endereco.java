@@ -1,10 +1,12 @@
 package br.com.cadastro.dominio.entidade.objetos;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public class Endereco {
 
     private String rua;

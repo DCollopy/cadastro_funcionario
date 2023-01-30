@@ -1,10 +1,12 @@
 package br.com.cadastro.dominio.entidade.objetos;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public class Telefone {
 
     private String ddd;
@@ -16,7 +18,7 @@ public class Telefone {
             Logger.getLogger("TELEFONE").info("DDD invalido");
             throw new IllegalArgumentException("DDD inválido");
         }
-        if(numero_telefone == null || !numero_telefone.matches("^(\\d{4}-?\\d{4})$")) {
+        if(numero_telefone == null || !numero_telefone.matches("^(\\d{5}-?\\d{4})$")) {
             Logger.getLogger("TELEFONE").info("Numero invalido");
             throw new IllegalArgumentException("Número de telefone inválido");
         }
