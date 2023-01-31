@@ -1,6 +1,8 @@
 package br.com.cadastro;
 
 import br.com.cadastro.dominio.entidade.Funcionario;
+import br.com.cadastro.dominio.entidade.RelatorioDecimoTerceiro;
+import br.com.cadastro.dominio.entidade.RelatorioFerias;
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
 import br.com.cadastro.dominio.entidade.objetos.*;
 import br.com.cadastro.dominio.usecases.excel.GerarExcelSalario;
@@ -29,9 +31,27 @@ class GerarExcelSalarioTest {
     private String fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
     RelatorioMensal relatorioMensal = new RelatorioMensal(funcionario, 100.00, "Teste");
 
+    RelatorioDecimoTerceiro relatorioDecimoTerceiro = new RelatorioDecimoTerceiro(funcionario, 0, "Teste");
+
+    RelatorioFerias relatorioFeriasNew = new RelatorioFerias(funcionario,100.00, "Teste");
+
     @Test
     void gerarExcelSalario(){
         RelatorioMensal relatorioMensalGerado = relatorioMensalValidaTeste.criaRelatorioMensal(relatorioMensal);
         gerarExcelSalario.gerarExcelSalario(relatorioMensalGerado, fileLocation);
+    }
+
+    @Test
+    void gerarExcelDecimoTerceiro(){
+        String FILE_NAME = "RelatorioDecimoTerceiro.xlsx";
+        String fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
+        gerarExcelSalario.gerarExcelDecimoTerceiro(relatorioDecimoTerceiro, fileLocation);
+    }
+
+    @Test
+    void gerarExcelFerias(){
+        String FILE_NAME = "RelatorioFerias.xlsx";
+        String fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
+        gerarExcelSalario.gerarExcelFerias(relatorioFeriasNew, fileLocation);
     }
 }

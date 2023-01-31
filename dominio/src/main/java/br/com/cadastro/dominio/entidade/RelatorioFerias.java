@@ -2,6 +2,7 @@ package br.com.cadastro.dominio.entidade;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @Data
@@ -16,6 +17,8 @@ public class RelatorioFerias {
     private double salarioBrutoFerias;
     private double outrosDescontos;
     private String observacoes;
+
+    private final LocalDate dataInicioFerias = LocalDate.now();
     public RelatorioFerias(){}
     public RelatorioFerias(Funcionario funcionario, double descontoInss
             , double descontoIrrf, double descontoTotal
