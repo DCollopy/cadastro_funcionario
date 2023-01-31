@@ -6,43 +6,62 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 public class GerarExcelSalario implements IGerarExcelSalario {
 
     @Override
-    public void gerarExcelSalario(RelatorioMensal relatorioMensal, String caminhoArquivo) throws IOException {
-        int lastRow = 0;
+    public void gerarExcelSalario(RelatorioMensal relatorioMensal, String caminhoArquivo)  {
+        AtomicInteger lastRow = new AtomicInteger();
         AtomicInteger lastCell = new AtomicInteger();
-        Workbook workbook = new HSSFWorkbook(new FileInputStream(caminhoArquivo));
+        Object[][] relatorio = {
+                {"TITULO", relatorioMensal.getTitulo()}
+                ,{"DATA RELATORIO", relatorioMensal.getMesRelatorio().toString()}
+                ,{"NOME", relatorioMensal.getFuncionario().getNome()}
+                ,{"SOBRENOME", relatorioMensal.getFuncionario().getSobrenome()}
+                ,{"DEPENDENTES", relatorioMensal.getFuncionario().getDependentes()}
+                ,{ "IMPOSTO DE RENDA", relatorioMensal.getDescontoIrrf()}
+                ,{"INSS", relatorioMensal.getDescontoInss()}
+                ,{"OUTROS DESCONTOS", relatorioMensal.getOutrosDescontos()}
+                ,{"TOTAL DE DESCONTOS", relatorioMensal.getDescontoTotal()}
+                ,{"SALARIO BRUTO", relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto()}
+                ,{"SALARIO LIQUIDO", relatorioMensal.getSalarioLiquido()}
+        };
 
-        Sheet sheet = workbook.getSheetAt(0);
-        lastRow = sheet.getLastRowNum();
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("RelatorioMensal");
 
-        sheet.forEach((row) -> {
-            lastCell.set(row.getLastCellNum());
+        int rowNum = 0;
+        System.out.println("Creating excel");
 
-            row.forEach((cell) -> {
-                //System.out.println(cell.getStringCellValue());
-            });
-        });
+        for (Object[] datatype : relatorio) {
+            Row row = sheet.createRow(rowNum++);
+            int colNum = 0;
+            for (Object field : datatype) {
+                Cell cell = row.createCell(colNum++);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                } else if (field instanceof Double) {
+                    cell.setCellValue((Double) field);
+                }
+            }
+        }
 
-        Cell cell = sheet.createRow(lastRow + 2)
-                .createCell(lastCell.getAndIncrement());
-        cell.setCellType(CellType.STRING);
-        cell.setCellValue(relatorioMensal.getTitulo());
-        cell.setCellValue(relatorioMensal.getMesRelatorio());
-        cell.setCellValue(relatorioMensal.getFuncionario().getNome());
-        cell.setCellValue(relatorioMensal.getFuncionario().getSobrenome());
-        cell.setCellValue(relatorioMensal.getDescontoIrrf());
-        cell.setCellValue(relatorioMensal.getDescontoInss());
-        cell.setCellValue(relatorioMensal.getOutrosDescontos());
-        cell.setCellValue(relatorioMensal.getDescontoTotal());
-        cell.setCellValue(relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto());
-        cell.setCellValue(relatorioMensal.getSalarioLiquido());
-
-        workbook.write(new FileOutputStream(caminhoArquivo));
-        workbook.close();
+        try {
+            FileOutputStream outputStream = new FileOutputStream(caminhoArquivo);
+            workbook.write(outputStream);
+            workbook.close();
+        } catch (FileNotFoundException e) {
+            Logger.getLogger("GerarExcelSalario").info(e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            Logger.getLogger("GerarExcelSalario").info(e.getMessage());
+            e.printStackTrace();
+        }
+        Logger.getLogger("GerarExcelSalario").info("Arquivo gerado com sucesso");
     }
 }

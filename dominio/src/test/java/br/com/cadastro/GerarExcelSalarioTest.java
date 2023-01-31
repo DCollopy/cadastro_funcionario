@@ -30,7 +30,7 @@ class GerarExcelSalarioTest {
     RelatorioMensal relatorioMensal = new RelatorioMensal(funcionario, 100.00, "Teste");
 
     @Test
-    void gerarExcelSalario() throws Exception {
+    void gerarExcelSalario(){
         RelatorioMensal relatorioMensalGerado = relatorioMensalValidaTeste.criaRelatorioMensal(relatorioMensal);
         gerarExcelSalario.gerarExcelSalario(relatorioMensalGerado, fileLocation);
     }
