@@ -1,6 +1,9 @@
 package br.com.cadastro.dominio.usecases;
 
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
+import br.com.cadastro.dominio.usecases.excel.GerarExcelSalario;
+import br.com.cadastro.dominio.usecases.excel.IGerarExcelSalario;
+import br.com.cadastro.dominio.usecases.excel.ILerExcel;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;

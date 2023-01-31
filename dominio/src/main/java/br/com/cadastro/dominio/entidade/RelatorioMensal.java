@@ -1,11 +1,13 @@
 package br.com.cadastro.dominio.entidade;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public class RelatorioMensal {
 
     private final String titulo = "Relatorio Mensal";
