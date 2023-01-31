@@ -17,14 +17,14 @@ public class GerarExcelSalario implements IGerarExcelSalario {
         AtomicInteger lastCell = new AtomicInteger();
         Workbook workbook = new HSSFWorkbook(new FileInputStream(caminhoArquivo));
 
-        Sheet sheet = workbook.getSheetAt(1);
+        Sheet sheet = workbook.getSheetAt(0);
         lastRow = sheet.getLastRowNum();
 
         sheet.forEach((row) -> {
             lastCell.set(row.getLastCellNum());
 
             row.forEach((cell) -> {
-                System.out.println(cell.getStringCellValue());
+                //System.out.println(cell.getStringCellValue());
             });
         });
 
