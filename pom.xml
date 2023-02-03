@@ -6,6 +6,7 @@
     <modules>
         <module>dominio</module>
         <module>web</module>
+        <module>persistencia</module>
     </modules>
     <groupId>com.br</groupId>
     <artifactId>cadastro_funcionario</artifactId>

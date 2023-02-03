@@ -7,7 +7,8 @@
         <artifactId>cadastro_funcionario</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>dominio</artifactId>
+    <groupId>br.com.cadastro.dominio</groupId>
+     <artifactId>dominio</artifactId>
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
