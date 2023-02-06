@@ -1,6 +1,7 @@
 package br.com.cadastro.persistencia.service.funcionario;
 
 import br.com.cadastro.dominio.entidade.Funcionario;
+
 import br.com.cadastro.dominio.entidade.service.FuncionarioService;
 import br.com.cadastro.persistencia.converter.CpfMapper;
 import br.com.cadastro.persistencia.converter.FuncionarioMapper;
@@ -32,6 +33,16 @@ public class FuncionarioIml implements FuncionarioService {
         Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
         FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
         return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.salvar(funcionarioEntidade));
+    }
+
+    @Override
+    public List<Funcionario> criaFuncionarios(List<Funcionario> funcionarios) {
+        for (Funcionario funcionario : funcionarios) {
+            Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
+            FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
+            funcionarioRepositorio.salvar(funcionarioEntidade);
+        }
+        return funcionarios;
     }
 
     @Override

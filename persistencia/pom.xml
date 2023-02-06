@@ -58,7 +58,7 @@
             <artifactId>jaxb-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.br</groupId>
+            <groupId>br.com.cadastro.dominio</groupId>
             <artifactId>dominio</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
