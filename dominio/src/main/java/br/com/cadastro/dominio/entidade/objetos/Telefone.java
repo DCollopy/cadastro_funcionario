@@ -13,6 +13,8 @@ public class Telefone {
 
     private String numero_telefone;
 
+    public Telefone(){}
+
     public Telefone(String ddd, String numero_telefone) {
         if(ddd == null || !ddd.matches("\\d{2}")) {
             Logger.getLogger("TELEFONE").info("DDD invalido");

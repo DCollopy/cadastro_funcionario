@@ -10,8 +10,7 @@ import java.util.logging.Logger;
 public class Salario {
     private double salario_bruto;
 
-    public Salario() {
-    }
+    public Salario() {}
     public Salario(double salario_bruto) {
         if (salario_bruto < 0) {
             Logger.getLogger("SALARIO").info("Salario invalido");

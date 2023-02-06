@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class FuncionarioDTO {
+public class FuncionarioDTO extends UsuarioDTO {
 
     private CarteiraTrabalhoDTO carteiraTrabalho;
 

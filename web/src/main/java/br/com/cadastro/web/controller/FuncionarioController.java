@@ -33,6 +33,16 @@ public class FuncionarioController {
         this.funcionarioMapperWeb = funcionarioMapperWeb;
     }
 
+    @GetMapping("/listar")
+    public List<FuncionarioDTO> listar() {
+        return funcionarioMapperWeb.converteDTOToFuncionarios(funcionarioService.listaFuncionarios());
+    }
+
+    @GetMapping("/buscar/{cpf}")
+    public FuncionarioDTO buscar(@PathVariable String cpf) {
+        return funcionarioMapperWeb.converteFuncionarioToDTO(funcionarioService.buscaFuncionario(cpf));
+    }
+
     @PostMapping("/cadastro/funcionario")
     public Funcionario criarFuncionario(@Valid @RequestBody FuncionarioDTO funcionarioDTO) {
         Funcionario funcionario = funcionarioMapperWeb.converteDTOToFuncionario(funcionarioDTO);
@@ -57,4 +67,21 @@ public class FuncionarioController {
         }
         return new ResponseEntity("Successfully uploaded - " + arquivo.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
     }
+
+    @PutMapping("/editar/{cpf}")
+    public ResponseEntity editarFuncionario(@PathVariable String cpf, @Valid @RequestBody FuncionarioDTO funcionarioDTO) {
+        Funcionario funcionario = funcionarioMapperWeb.converteDTOToFuncionario(funcionarioDTO);
+        if(funcionarioService.existeFuncionario(cpf)) {
+            funcionarioService.editaFuncionario(funcionario);
+            return ResponseEntity.ok().build();
+        }
+       return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/excluir/{cpf}")
+    public ResponseEntity excluirFuncionario(@PathVariable String cpf) {
+        funcionarioService.excluirFuncionario(cpf);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class Email {
 
     private String endereco_email;
-
+    public Email(){}
     public Email(String endereco_email) {
 
         if(!endereco_email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {

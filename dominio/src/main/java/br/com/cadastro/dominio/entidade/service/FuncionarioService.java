@@ -9,11 +9,11 @@ public interface FuncionarioService {
     Funcionario criaFuncionario(Funcionario funcionario);
     List<Funcionario> criaFuncionarios(List<Funcionario> funcionario);
 
-    Funcionario editaFuncionario(String cpf);
+    Funcionario editaFuncionario(Funcionario funcionario);
 
     List<Funcionario> listaFuncionarios();
 
-    void deletaFuncionario(String cpf);
+    void excluirFuncionario(String cpf);
 
     Funcionario buscaFuncionario(String cpf);
 

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FuncionarioMapper {
@@ -17,5 +19,9 @@ public class FuncionarioMapper {
 
     public Funcionario converteEntidadeToFuncionario(FuncionarioEntidade funcionarioEntidade) {
         return modelMapper.map(funcionarioEntidade, Funcionario.class);
+    }
+
+    public List<Funcionario> converteEntidadeToFuncionario(List<FuncionarioEntidade> funcionarioEntidades) {
+        return funcionarioEntidades.stream().map(this::converteEntidadeToFuncionario).toList();
     }
 }

@@ -19,6 +19,7 @@ public class Endereco {
 
     private Cep cep;
 
+    public Endereco() {}
     public Endereco(String rua, String numero_endereco, String bairro, String cidade, Cep cep) {
         if(rua == null || rua.trim().equals("")){
             Logger.getLogger("ENDEREÇO").info("Rua invalida");

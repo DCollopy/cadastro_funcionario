@@ -22,7 +22,7 @@ public class FuncionarioMapperWeb {
         return modelMapper.map(funcionarioDTO, Funcionario.class);
     }
 
-    public List<Funcionario> converteDTOToFuncionarios(List<FuncionarioDTO> funcionarioDTO) {
-        return funcionarioDTO.stream().map(this::converteDTOToFuncionario).collect(Collectors.toList());
+    public List<FuncionarioDTO> converteDTOToFuncionarios(List<Funcionario> funcionario) {
+        return funcionario.stream().map(this::converteFuncionarioToDTO).collect(Collectors.toList());
     }
 }
