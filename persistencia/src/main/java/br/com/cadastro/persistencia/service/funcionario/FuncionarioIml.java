@@ -9,7 +9,6 @@ import br.com.cadastro.persistencia.converter.FuncionarioMapper;
 import br.com.cadastro.persistencia.entidade.CpfEntidade;
 import br.com.cadastro.persistencia.entidade.FuncionarioEntidade;
 import br.com.cadastro.persistencia.repositorio.FuncionarioRepositorio;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,28 +35,46 @@ public class FuncionarioIml implements FuncionarioService {
     public Funcionario criaFuncionario(Funcionario funcionario) {
         Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
         FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
+        if(funcionarioRepositorio.existeCpf(funcionarioEntidade.getCpf())){
+            throw new RuntimeException("CPF já cadastrado");
+        }
         return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.salvar(funcionarioEntidade));
     }
 
     @Override
     public List<Funcionario> criaFuncionarios(List<Funcionario> funcionarios) {
-        for (Funcionario funcionario : funcionarios) {
-            Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
-            FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
-            funcionarioRepositorio.salvar(funcionarioEntidade);
+        try{
+            for (Funcionario funcionario : funcionarios) {
+                Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
+                FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
+                if(!funcionarioRepositorio.existeCpf(funcionarioEntidade.getCpf())){
+                    throw new RuntimeException("CPF já cadastrado");
+                }
+                funcionarioRepositorio.salvar(funcionarioEntidade);
+            }
+            return funcionarios;
+        } catch (Exception e) {
+            Logger.getLogger("FUNCIONARIO").info("Erro ao criar funcionarios");
+            throw new IllegalArgumentException("Erro ao criar funcionarios");
         }
-        return funcionarios;
     }
 
     @Override
     public Funcionario editaFuncionario(Funcionario funcionario) {
         CpfEntidade cpfEntidade = cpfMapper.converteCpfToEntidade(funcionario.getCpf());
         FuncionarioEntidade existe = funcionarioRepositorio.encontrePorCpf(cpfEntidade);
-        if (existe != null) {
-            return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.editar(existe));
+        try{
+            if(existe != null){
+                FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcionario);
+                return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.salvar(funcionarioEntidade));
+            } else {
+                Logger.getLogger("FUNCIONARIO").info("Funcionario nao existe");
+                throw new IllegalArgumentException("Funcionario nao existe");
+            }
+        } catch (Exception e) {
+            Logger.getLogger("FUNCIONARIO").info("Erro ao editar funcionario");
+            throw new IllegalArgumentException("Erro ao editar funcionario");
         }
-
-        return funcionarioMapper.converteEntidadeToFuncionario(existe);
     }
 
     @Override
@@ -69,18 +86,34 @@ public class FuncionarioIml implements FuncionarioService {
     public void excluirFuncionario(String cpf) {
         Cpf novo = new Cpf(cpf);
         CpfEntidade cpfEntidade = cpfMapper.converteCpfToEntidade(novo);
-        if(funcionarioRepositorio.existeCpf(cpfEntidade)){
-            funcionarioRepositorio.excluir(cpfEntidade);
+        try {
+            if(funcionarioRepositorio.existeCpf(cpfEntidade)){
+                funcionarioRepositorio.excluir(cpfEntidade);
+            } else {
+                Logger.getLogger("FUNCIONARIO").info("Funcionario nao existe");
+                throw new IllegalArgumentException("Funcionario nao existe");
+            }
+        } catch (Exception e) {
+            Logger.getLogger("FUNCIONARIO").info("Erro ao excluir funcionario");
+            throw new IllegalArgumentException("Erro ao excluir funcionario");
         }
-        Logger.getLogger("FUNCIONARIO WEB").info("Funcionario não encontrado");
-        throw new IllegalArgumentException("Funcionario não encontrado");
     }
 
     @Override
     public Funcionario buscaFuncionario(String cpf) {
         Cpf novo = new Cpf(cpf);
         CpfEntidade cpfEntidade = cpfMapper.converteCpfToEntidade(novo);
-        return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.encontrePorCpf(cpfEntidade));
+        try{
+            if(funcionarioRepositorio.existeCpf(cpfEntidade)){
+                return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.encontrePorCpf(cpfEntidade));
+            } else {
+                Logger.getLogger("FUNCIONARIO").info("Funcionario nao existe");
+                throw new IllegalArgumentException("Funcionario nao existe");
+            }
+        } catch (Exception e) {
+            Logger.getLogger("FUNCIONARIO").info("Erro ao buscar funcionario");
+            throw new IllegalArgumentException("Erro ao buscar funcionario");
+        }
     }
 
     @Override

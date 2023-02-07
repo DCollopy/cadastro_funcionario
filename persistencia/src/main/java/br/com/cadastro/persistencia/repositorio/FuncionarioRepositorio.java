@@ -25,12 +25,16 @@ public class FuncionarioRepositorio {
     }
     @Transactional
     public FuncionarioEntidade encontrePorCpf(CpfEntidade cpf) {
-        return entityManager.find(FuncionarioEntidade.class, cpf);
+        return entityManager.createQuery("select f from FuncionarioEntidade f where f.cpf = :cpf", FuncionarioEntidade.class)
+                .setParameter("cpf", cpf)
+                .getSingleResult();
     }
 
     @Transactional
     public Boolean existeCpf(CpfEntidade cpf) {
-        return entityManager.contains(cpf);
+        return entityManager.createQuery("select f from FuncionarioEntidade f where f.cpf = :cpf", FuncionarioEntidade.class)
+                .setParameter("cpf", cpf)
+                .getResultList().isEmpty();
     }
 
     @Transactional

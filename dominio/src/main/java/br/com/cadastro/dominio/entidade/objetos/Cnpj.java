@@ -1,12 +1,13 @@
 package br.com.cadastro.dominio.entidade.objetos;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.util.logging.Logger;
 
 @Data
+@SuperBuilder
 public class Cnpj {
-
     private String numero_cnpj;
     public Cnpj(){}
     public Cnpj(String numero_cnpj) {

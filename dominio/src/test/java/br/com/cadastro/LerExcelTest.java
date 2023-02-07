@@ -1,6 +1,6 @@
 package br.com.cadastro;
 
-import br.com.cadastro.dominio.usecases.excel.LerExcelFuncionario;
+import br.com.cadastro.dominio.usecases.excel.LerExcel;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -8,9 +8,9 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LerExcelFuncionarioTest {
+class LerExcelTest {
 
-    protected LerExcelFuncionario lerExcelFuncionario = new LerExcelFuncionario();
+    protected LerExcel lerExcel = new LerExcel();
 
     private static String FILE_NAME = "funcionarios.xlsx";
     private String fileLocation;
@@ -18,12 +18,12 @@ class LerExcelFuncionarioTest {
     @Test
     void leituraExcel() throws IOException {
         fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
-        assertNotNull(lerExcelFuncionario.leituraExcel(fileLocation));
+        assertNotNull(lerExcel.leituraExcel(fileLocation));
     }
 
     @Test
     void leituraExcelException() throws IOException {
         fileLocation = new File("src/test/java/br/com/cadastro/teste/" + "teste.csv").getAbsolutePath();
-        assertThrows(IOException.class, () -> lerExcelFuncionario.leituraExcel(fileLocation));
+        assertThrows(IOException.class, () -> lerExcel.leituraExcel(fileLocation));
     }
 }

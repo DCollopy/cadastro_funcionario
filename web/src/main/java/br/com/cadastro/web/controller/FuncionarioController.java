@@ -4,7 +4,7 @@ import br.com.cadastro.dominio.entidade.Funcionario;
 
 import br.com.cadastro.dominio.entidade.service.FuncionarioService;
 import br.com.cadastro.dominio.usecases.excel.ILerExcel;
-import br.com.cadastro.dominio.usecases.excel.LerExcelFuncionario;
+import br.com.cadastro.dominio.usecases.excel.LerExcel;
 import br.com.cadastro.web.converte.FuncionarioMapperWeb;
 import br.com.cadastro.web.model.FuncionarioDTO;
 import org.apache.commons.io.FileUtils;
@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/cadastro/funcionario")
+@RequestMapping("/api/funcionario")
 public class FuncionarioController {
     private final FuncionarioService funcionarioService;
     private final FuncionarioMapperWeb funcionarioMapperWeb;
 
-    private ILerExcel lerExcel = new LerExcelFuncionario();
+    private ILerExcel lerExcel = new LerExcel();
 
     public FuncionarioController(FuncionarioService funcionarioService, FuncionarioMapperWeb funcionarioMapperWeb) {
         this.funcionarioService = funcionarioService;
@@ -43,13 +43,13 @@ public class FuncionarioController {
         return funcionarioMapperWeb.converteFuncionarioToDTO(funcionarioService.buscaFuncionario(cpf));
     }
 
-    @PostMapping("/cadastro/funcionario")
+    @PostMapping("/cadastro")
     public Funcionario criarFuncionario(@Valid @RequestBody FuncionarioDTO funcionarioDTO) {
         Funcionario funcionario = funcionarioMapperWeb.converteDTOToFuncionario(funcionarioDTO);
         return funcionarioService.criaFuncionario(funcionario);
     }
 
-    @PostMapping(value = "/cadastro/funcionario/lote", consumes = {
+    @PostMapping(value = "/cadastro/lote", consumes = {
             "multipart/form-data"
     })
     public ResponseEntity< ? > uploadFile(@RequestParam("arquivo") MultipartFile arquivo) {
@@ -65,7 +65,7 @@ public class FuncionarioController {
         } catch (IOException e) {
             return new ResponseEntity < > (HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("Successfully uploaded - " + arquivo.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity("Sucesso ao subir arquivo - " + arquivo.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
     }
 
     @PutMapping("/editar/{cpf}")
@@ -83,5 +83,4 @@ public class FuncionarioController {
         funcionarioService.excluirFuncionario(cpf);
         return ResponseEntity.ok().build();
     }
-
 }
