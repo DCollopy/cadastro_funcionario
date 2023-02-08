@@ -20,6 +20,8 @@ public class Funcionario extends Usuario {
 
     private LocalDate data_admissao;
 
+    private Empresa empresa;
+
     public Funcionario(){
         super();
     }

@@ -16,4 +16,6 @@ public class FuncionarioDTO extends UsuarioDTO {
     private int dependentes;
 
     private LocalDate data_admissao;
+
+    private EmpresaDTO empresa;
 }

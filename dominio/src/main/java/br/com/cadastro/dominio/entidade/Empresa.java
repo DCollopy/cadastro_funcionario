@@ -11,6 +11,8 @@ public class Empresa {
     private String nomefantasia;
     private Cnpj cnpj;
 
+    private Funcionario funcionario;
+    public Empresa(){}
     public Empresa(String razaosocial, String nomefantasia, Cnpj cnpj) {
         this.razaosocial = razaosocial;
         this.nomefantasia = nomefantasia;

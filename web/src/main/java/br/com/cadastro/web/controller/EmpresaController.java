@@ -36,11 +36,15 @@ public class EmpresaController {
         return empresaMapperWeb.converteListaEmpresaToDTO(empresaService.listarEmpresas());
     }
 
-    @GetMapping("/buscar/{cpf}")
-    public EmpresaDTO buscar(@PathVariable String cpf) {
-        return empresaMapperWeb.converteEmpresaToDTO(empresaService.encontrePorCnpj(cpf));
+    @GetMapping("/buscar/{cnpj}")
+    public EmpresaDTO buscar(@PathVariable String cnpj) {
+        return empresaMapperWeb.converteEmpresaToDTO(empresaService.encontrePorCnpj(cnpj));
     }
 
+    @GetMapping("/buscar/funcionarios/{cnpj}")
+    public ResponseEntity buscarFuncionarios(@PathVariable String cnpj) {
+        return ResponseEntity.ok(empresaService.listarFuncionarios(cnpj));
+    }
     @PostMapping("/cadastro")
     public ResponseEntity criarEmpresa(@Valid @RequestBody EmpresaDTO empresaDTO) {
         Empresa empresa = empresaMapperWeb.converteDTOToEmpresa(empresaDTO);
@@ -68,9 +72,9 @@ public class EmpresaController {
     }
 
 
-    @DeleteMapping("/excluir/{cpf}")
-    public ResponseEntity excluir(@PathVariable String cpf) {
-        empresaService.excluir(cpf);
+    @DeleteMapping("/excluir/{cnpj}")
+    public ResponseEntity excluir(@PathVariable String cnpj) {
+        empresaService.excluir(cnpj);
         return ResponseEntity.ok().build();
     }
 }

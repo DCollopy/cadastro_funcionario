@@ -103,7 +103,7 @@ public class FuncionarioIml implements FuncionarioService {
         Cpf novo = new Cpf(cpf);
         CpfEntidade cpfEntidade = cpfMapper.converteCpfToEntidade(novo);
         try {
-            if(funcionarioRepositorio.existeCpf(cpfEntidade)){
+            if(!funcionarioRepositorio.existeCpf(cpfEntidade)){
                 funcionarioRepositorio.excluir(cpfEntidade);
             } else {
                 Logger.getLogger("FUNCIONARIO").info("Funcionario nao existe");
@@ -120,15 +120,15 @@ public class FuncionarioIml implements FuncionarioService {
         Cpf novo = new Cpf(cpf);
         CpfEntidade cpfEntidade = cpfMapper.converteCpfToEntidade(novo);
         try{
-            if(funcionarioRepositorio.existeCpf(cpfEntidade)){
+            if(!funcionarioRepositorio.existeCpf(cpfEntidade)){
                 return funcionarioMapper.converteEntidadeToFuncionario(funcionarioRepositorio.encontrePorCpf(cpfEntidade));
             } else {
                 Logger.getLogger("FUNCIONARIO").info("Funcionario nao existe");
                 throw new IllegalArgumentException("Funcionario nao existe");
             }
         } catch (Exception e) {
-            Logger.getLogger("FUNCIONARIO").info("Erro ao buscar funcionario");
-            throw new IllegalArgumentException("Erro ao buscar funcionario");
+            Logger.getLogger("FUNCIONARIO").info("Erro ao buscar funcionario" + e.getMessage());
+            throw new IllegalArgumentException("Erro ao buscar funcionario" + e.getMessage());
         }
     }
 

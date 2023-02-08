@@ -8,4 +8,5 @@ public class EmpresaDTO {
     private String razaosocial;
     private String nomefantasia;
     private Cnpj cnpj;
+    private FuncionarioDTO funcionario;
 }
