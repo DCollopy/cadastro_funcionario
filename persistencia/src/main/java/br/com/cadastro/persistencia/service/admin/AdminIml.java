@@ -55,7 +55,7 @@ public class AdminIml implements AdminService {
         } catch (Exception e) {
             Logger.getLogger(e.getMessage());
         }
-     }
+    }
 
     @Override
     public Admin editaAdmin(Admin admin) {

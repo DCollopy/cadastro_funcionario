@@ -43,24 +43,25 @@ public class FuncionarioController {
         return funcionarioMapperWeb.converteFuncionarioToDTO(funcionarioService.buscaFuncionario(cpf));
     }
 
-    @PostMapping("/cadastro")
-    public Funcionario criarFuncionario(@Valid @RequestBody FuncionarioDTO funcionarioDTO) {
+    @PostMapping("/cadastro/{cnpj}")
+    public Funcionario criarFuncionario(@Valid @PathVariable String cnpj,@RequestBody FuncionarioDTO funcionarioDTO) {
         Funcionario funcionario = funcionarioMapperWeb.converteDTOToFuncionario(funcionarioDTO);
-        return funcionarioService.criaFuncionario(funcionario);
+        return funcionarioService.criaFuncionario(funcionario,cnpj);
     }
 
-    @PostMapping(value = "/cadastro/lote", consumes = {
+    @PostMapping(value = "/cadastro/lote/{cnpj}", consumes = {
             "multipart/form-data"
     })
-    public ResponseEntity< ? > uploadFile(@RequestParam("arquivo") MultipartFile arquivo) {
+    public ResponseEntity< ? > uploadFile(@PathVariable String cnpj,@RequestParam("arquivo") MultipartFile arquivo) {
         if (arquivo.isEmpty()) {
             return new ResponseEntity("Selecione um arquivo", HttpStatus.OK);
         }
         try {
+
             File arquivoFuncionario = new File(Objects.requireNonNull(arquivo.getOriginalFilename()));
             FileUtils.writeByteArrayToFile(arquivoFuncionario, arquivo.getBytes());
-            List<Funcionario> leitrua = lerExcel.leituraExcel(arquivoFuncionario.getAbsolutePath());
-            funcionarioService.criaFuncionarios(leitrua);
+            List<Funcionario> leitura = lerExcel.leituraExcel(arquivoFuncionario.getAbsolutePath());
+            funcionarioService.criaFuncionarios(leitura,cnpj);
 
         } catch (IOException e) {
             return new ResponseEntity < > (HttpStatus.BAD_REQUEST);

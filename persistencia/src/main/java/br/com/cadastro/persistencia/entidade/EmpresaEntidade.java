@@ -2,9 +2,8 @@ package br.com.cadastro.persistencia.entidade;
 
 import lombok.Data;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,4 +13,7 @@ public class EmpresaEntidade {
     private String nomefantasia;
     @EmbeddedId
     private CnpjEntidade cnpj;
+
+    @OneToMany(mappedBy = "empresa")
+    private Set<FuncionarioEntidade> funcionario;
 }

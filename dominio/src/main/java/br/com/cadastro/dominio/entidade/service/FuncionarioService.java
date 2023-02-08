@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface FuncionarioService {
 
-    Funcionario criaFuncionario(Funcionario funcionario);
-    List<Funcionario> criaFuncionarios(List<Funcionario> funcionario);
+    Funcionario criaFuncionario(Funcionario funcionario, String cnpj);
+    List<Funcionario> criaFuncionarios(List<Funcionario> funcionario, String cnpj);
 
     Funcionario editaFuncionario(Funcionario funcionario);
 

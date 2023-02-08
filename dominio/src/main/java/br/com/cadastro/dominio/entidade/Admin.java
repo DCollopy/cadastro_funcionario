@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 @Data
 @SuperBuilder
 public class Admin extends Usuario {
-
     private Cnpj cnpj;
 
     private final String cargo = "Admin";
@@ -20,7 +19,6 @@ public class Admin extends Usuario {
             Logger.getLogger("ADMIN").info("CNPJ invalido");
             throw new IllegalArgumentException("CNPJ invalido");
         }
-
         this.cnpj = cnpj;
     }
 

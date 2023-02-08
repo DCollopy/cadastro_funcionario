@@ -3,8 +3,7 @@ package br.com.cadastro.persistencia.entidade;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 @Entity
@@ -21,4 +20,10 @@ public class FuncionarioEntidade extends UsuarioEntidade implements Serializable
     private int dependentes = 0;
 
     private LocalDate data_admissao;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "empresa_numero_cnpj", referencedColumnName = "numero_cnpj")
+    })
+    private EmpresaEntidade empresa;
 }
