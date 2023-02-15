@@ -8,6 +8,7 @@ import br.com.cadastro.persistencia.converter.CnpjMapper;
 import br.com.cadastro.persistencia.converter.CpfMapper;
 import br.com.cadastro.persistencia.converter.FuncionarioMapper;
 import br.com.cadastro.persistencia.entidade.CpfEntidade;
+import br.com.cadastro.persistencia.entidade.EmpresaEntidade;
 import br.com.cadastro.persistencia.entidade.FuncionarioEntidade;
 import br.com.cadastro.persistencia.repositorio.EmpresaRepositorio;
 import br.com.cadastro.persistencia.repositorio.FuncionarioRepositorio;
@@ -60,10 +61,11 @@ public class FuncionarioIml implements FuncionarioService {
     public List<Funcionario> criaFuncionarios(List<Funcionario> funcionarios, String cnpj) {
         try{
             Cnpj insereCnpj = getCnpj(cnpj);
+            EmpresaEntidade acheiEmpresa = empresaRepositorio.encontrePorCnpj(cnpjMapper.converteCnpjToEntidade(insereCnpj));
             for (Funcionario funcionario : funcionarios) {
                 Funcionario funcioValida = funcionarioValidaAbs.criaFuncionario(funcionario);
                 FuncionarioEntidade funcionarioEntidade = funcionarioMapper.converteFuncionarioToEntidade(funcioValida);
-                funcionarioEntidade.setEmpresa(empresaRepositorio.encontrePorCnpj(cnpjMapper.converteCnpjToEntidade(insereCnpj)));
+                funcionarioEntidade.setEmpresa(acheiEmpresa);
                 valida(funcionarioEntidade);
                 funcionarioRepositorio.salvar(funcionarioEntidade);
                 empresaRepositorio.encontrePorCnpj(cnpjMapper.converteCnpjToEntidade(insereCnpj)).getFuncionario().add(funcionarioEntidade);
@@ -146,9 +148,11 @@ public class FuncionarioIml implements FuncionarioService {
     }
 
     private Cnpj getCnpj(String cnpj) {
-        StringBuilder stringBuilder = new StringBuilder(cnpj);
-        stringBuilder.insert(cnpj.length() - 7, '/');
-        Cnpj insereCnpj = new Cnpj(stringBuilder.toString());
-        return insereCnpj;
+        if(cnpj.length() != 18) {
+            StringBuilder stringBuilder = new StringBuilder(cnpj);
+            stringBuilder.insert(cnpj.length() - 7, '/');
+            return new Cnpj(stringBuilder.toString());
+        }
+        return new Cnpj(cnpj);
     }
 }

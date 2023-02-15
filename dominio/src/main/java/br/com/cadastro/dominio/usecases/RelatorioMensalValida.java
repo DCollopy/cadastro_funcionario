@@ -1,5 +1,6 @@
 package br.com.cadastro.dominio.usecases;
 
+import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
 import br.com.cadastro.dominio.usecases.excel.GerarExcelSalario;
 import br.com.cadastro.dominio.usecases.excel.IGerarExcelSalario;
@@ -27,11 +28,12 @@ public abstract class RelatorioMensalValida {
 
     public RelatorioMensal criaRelatorioMensal(RelatorioMensal relatorioMensal) {
         try {
-            double salarioBruto = relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto();
+            Funcionario funcionario = relatorioMensal.getFuncionario().iterator().next();
+            double salarioBruto = funcionario.getSalario_bruto().getSalario_bruto();
             calculoSalario.validaSalarioBruto(salarioBruto);
 
             relatorioMensal.setDescontoInss(calculoINSS.calculaDescontoInss(salarioBruto));
-            relatorioMensal.setDescontoIrrf(calculoIRRF.calculoImpostoRenda(salarioBruto, relatorioMensal.getFuncionario().getDependentes(), relatorioMensal.getDescontoInss()));
+            relatorioMensal.setDescontoIrrf(calculoIRRF.calculoImpostoRenda(salarioBruto, funcionario.getDependentes(), relatorioMensal.getDescontoInss()));
             relatorioMensal.setDescontoTotal(calculoDesconto.somaDescontos(relatorioMensal.getDescontoInss(), relatorioMensal.getDescontoIrrf()));
             relatorioMensal.setSalarioLiquido(calculoSalario.calculaSalarioLiquido(salarioBruto, relatorioMensal.getDescontoTotal(), relatorioMensal.getOutrosDescontos()));
 

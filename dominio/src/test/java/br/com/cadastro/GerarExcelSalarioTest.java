@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,9 +28,11 @@ class GerarExcelSalarioTest {
             , new Endereco("Rua teste", "123", "Bairro teste", "Cidade teste", new Cep("13456-780"))
             ,"Gerente", new CarteiraTrabalho("12345678910")
             , new Pis("12345678910"), new Salario(10000.00),2, LocalDate.of(2020, 1, 1));
+
+    Set<Funcionario> lista = Set.of(funcionario);
     private String FILE_NAME = "RelatorioMensal.xlsx";
     private String fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
-    RelatorioMensal relatorioMensal = new RelatorioMensal(funcionario, 100.00, "Teste");
+    RelatorioMensal relatorioMensal = new RelatorioMensal(lista, 100.00, "Teste");
 
     RelatorioDecimoTerceiro relatorioDecimoTerceiro = new RelatorioDecimoTerceiro(funcionario, 0, "Teste");
 

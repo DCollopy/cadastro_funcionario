@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Data
@@ -13,7 +14,7 @@ public class RelatorioMensal {
     private final String titulo = "Relatorio Mensal";
 
     private final LocalDate mesRelatorio = LocalDate.now();
-    private Funcionario funcionario;
+    private Set<Funcionario> funcionario;
     private double descontoIrrf;
     private double descontoInss;
     private double descontoTotal;
@@ -22,7 +23,7 @@ public class RelatorioMensal {
     private String observacoes;
     public RelatorioMensal(){}
 
-    public RelatorioMensal(Funcionario funcionario
+    public RelatorioMensal(Set<Funcionario> funcionario
             , double descontoInss , double descontoIrrf
             , double descontoTotal, double salarioLiquido
             , double outrosDescontos, String observacoes) {
@@ -44,7 +45,7 @@ public class RelatorioMensal {
         this.observacoes = observacoes;
     }
 
-    public RelatorioMensal(Funcionario funcionario, double outrosDescontos, String observacoes) {
+    public RelatorioMensal(Set<Funcionario> funcionario, double outrosDescontos, String observacoes) {
         if(funcionario == null){
             Logger.getLogger("RELATORIO MENSAL").info("Funcionario Invalido");
             throw new IllegalArgumentException("Funcionario Invalido");

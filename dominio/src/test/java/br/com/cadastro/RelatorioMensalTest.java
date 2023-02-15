@@ -7,6 +7,7 @@ import br.com.cadastro.dominio.usecases.teste.RelatorioMensalValidaTeste;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +23,8 @@ public class RelatorioMensalTest {
             ,"Gerente", new CarteiraTrabalho("12345678910")
             , new Pis("12345678910"), new Salario(10000.00),2, LocalDate.of(2020, 1, 1));
 
-    RelatorioMensal relatorioMensal = new RelatorioMensal(funcionario, 100.00, "Teste");
+    Set<Funcionario> funcionariosSet = Set.of(funcionario);
+    RelatorioMensal relatorioMensal = new RelatorioMensal(funcionariosSet, 100.00, "Teste");
 
     @Test
     void criaRelatorioMensal() {

@@ -1,12 +1,12 @@
 package br.com.cadastro.persistencia.entidade;
 
-import br.com.cadastro.dominio.entidade.Funcionario;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+
 @Entity
-@Data
 @Table(name = "relatorio_mensal")
 public class RelatorioMensalEntidade {
     @Id
@@ -22,9 +22,89 @@ public class RelatorioMensalEntidade {
     private double outrosDescontos;
     private String observacoes;
 
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "funcionario_numero_cpf", referencedColumnName = "numero_cpf")
-    })
-    private FuncionarioEntidade funcionario;
+    @ManyToMany(cascade = CascadeType.ALL )
+    @JoinTable(name = "relatorio_mensal_funcionario",
+            joinColumns = @JoinColumn(name = "relatorio_mensal_id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
+    private Set<FuncionarioEntidade> funcionario;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public LocalDate getMesRelatorio() {
+        return mesRelatorio;
+    }
+
+    public void setMesRelatorio(LocalDate mesRelatorio) {
+        this.mesRelatorio = mesRelatorio;
+    }
+
+    public double getDescontoIrrf() {
+        return descontoIrrf;
+    }
+
+    public void setDescontoIrrf(double descontoIrrf) {
+        this.descontoIrrf = descontoIrrf;
+    }
+
+    public double getDescontoInss() {
+        return descontoInss;
+    }
+
+    public void setDescontoInss(double descontoInss) {
+        this.descontoInss = descontoInss;
+    }
+
+    public double getDescontoTotal() {
+        return descontoTotal;
+    }
+
+    public void setDescontoTotal(double descontoTotal) {
+        this.descontoTotal = descontoTotal;
+    }
+
+    public double getSalarioLiquido() {
+        return salarioLiquido;
+    }
+
+    public void setSalarioLiquido(double salarioLiquido) {
+        this.salarioLiquido = salarioLiquido;
+    }
+
+    public double getOutrosDescontos() {
+        return outrosDescontos;
+    }
+
+    public void setOutrosDescontos(double outrosDescontos) {
+        this.outrosDescontos = outrosDescontos;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public Set<FuncionarioEntidade> getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionarios(Set<FuncionarioEntidade> funcionarios) {
+        this.funcionario = funcionarios;
+    }
 }

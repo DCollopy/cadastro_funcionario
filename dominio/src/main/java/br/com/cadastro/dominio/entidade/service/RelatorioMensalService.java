@@ -2,17 +2,19 @@ package br.com.cadastro.dominio.entidade.service;
 
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
 
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RelatorioMensalService {
 
-    void criaRelatorioMensal(RelatorioMensal relatorioMensal);
+    void criaRelatorioMensal(String cpf);
 
     RelatorioMensal editaRelatorioMensal(RelatorioMensal relatorioMensal);
 
-    List<RelatorioMensal> listaRelatorioMensal();
+    List<RelatorioMensal> listaRelatorioMensalPorFuncionario(String cpf);
 
-    RelatorioMensal busqueRelatorioMensalPorId(int id);
+    RelatorioMensal buscarRelatorioMensalPorMes(LocalDate mesRelatorio, String cpf);
 
-    void deletaRelatorioMensal(int id);
+    void gerarExcelRelatorio(String cpf);
 }

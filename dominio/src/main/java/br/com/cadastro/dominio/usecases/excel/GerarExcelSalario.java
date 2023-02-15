@@ -1,5 +1,6 @@
 package br.com.cadastro.dominio.usecases.excel;
 
+import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.entidade.RelatorioDecimoTerceiro;
 import br.com.cadastro.dominio.entidade.RelatorioFerias;
 import br.com.cadastro.dominio.entidade.RelatorioMensal;
@@ -14,17 +15,18 @@ public class GerarExcelSalario implements IGerarExcelSalario {
 
     @Override
     public void gerarExcelSalario(RelatorioMensal relatorioMensal, String caminhoArquivo)  {
+        Funcionario funcionario = relatorioMensal.getFuncionario().stream().iterator().next();
         Object[][] relatorio = {
                 {"TITULO", relatorioMensal.getTitulo()}
                 ,{"DATA RELATORIO", relatorioMensal.getMesRelatorio().toString()}
-                ,{"NOME", relatorioMensal.getFuncionario().getNome()}
-                ,{"SOBRENOME", relatorioMensal.getFuncionario().getSobrenome()}
-                ,{"DEPENDENTES", relatorioMensal.getFuncionario().getDependentes()}
+                ,{"NOME", funcionario.getNome()}
+                ,{"SOBRENOME", funcionario.getSobrenome()}
+                ,{"DEPENDENTES", funcionario.getDependentes()}
                 ,{ "IMPOSTO DE RENDA", relatorioMensal.getDescontoIrrf()}
                 ,{"INSS", relatorioMensal.getDescontoInss()}
                 ,{"OUTROS DESCONTOS", relatorioMensal.getOutrosDescontos()}
                 ,{"TOTAL DE DESCONTOS", relatorioMensal.getDescontoTotal()}
-                ,{"SALARIO BRUTO", relatorioMensal.getFuncionario().getSalario_bruto().getSalario_bruto()}
+                ,{"SALARIO BRUTO", funcionario.getSalario_bruto().getSalario_bruto()}
                 ,{"SALARIO LIQUIDO", relatorioMensal.getSalarioLiquido()}
         };
 

@@ -102,9 +102,11 @@ public class EmpresaIml implements EmpresaService {
     }
 
     private Cnpj getCnpj(String cnpj) {
-        StringBuilder stringBuilder = new StringBuilder(cnpj);
-        stringBuilder.insert(cnpj.length() - 7, '/');
-        Cnpj insereCnpj = new Cnpj(stringBuilder.toString());
-        return insereCnpj;
+        if(cnpj.length() != 18) {
+            StringBuilder stringBuilder = new StringBuilder(cnpj);
+            stringBuilder.insert(cnpj.length() - 7, '/');
+            return new Cnpj(stringBuilder.toString());
+        }
+        return new Cnpj(cnpj);
     }
 }
