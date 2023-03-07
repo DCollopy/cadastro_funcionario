@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-java
+spec:
+  selector:
+    matchLabels:
+      app: app-java
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: app-java
+    spec:
+      containers:
+        - name: app-java
+          image: damariscollopy/java:v1
+          ports:
+            - containerPort: 8080
+          env:   # Setting Environmental Variables
+            - name: DB_HOST   # Setting Database host address
+              value: mysql
+            - name: DB_NAME  # Setting Database name
+              value: gestao_empresa
+            - name: DB_USERNAME  # Setting Database username
+              value: root
+            - name: DB_PASSWORD # Setting Database password
+              value: pensealem
+# This seperator --- below is MANDATORY!!!
+---
+# Define a 'Service' To Expose the application
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8080    # Port inside the cluster
+      targetPort: 8080   # Port exposed to the outside
+  selector:
+    app: app-java
+  type: LoadBalancer
