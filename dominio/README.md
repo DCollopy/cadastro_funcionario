@@ -4,9 +4,16 @@ Criar um relatorio baseado em calculos de salario, onde o empresario posso subir
 
 
 * Classes Dominio 
-![img_1.png](../image/caso_de_uso_2.png)
+![img.png](../image/img.png)
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
 
 * Diagrama de Classe
-![img.png](../image/caso_de_uso_1.png)
+* 
+![img_3.png](img_3.png)
 
-![img_2.png](../image/caso_de_uso_3.png)
+![img_4.png](img_4.png)
