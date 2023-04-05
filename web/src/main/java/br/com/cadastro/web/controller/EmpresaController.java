@@ -6,6 +6,7 @@ import br.com.cadastro.dominio.usecases.excel.ILerExcel;
 import br.com.cadastro.dominio.usecases.excel.LerExcel;
 import br.com.cadastro.web.converte.EmpresaMapperWeb;
 import br.com.cadastro.web.model.EmpresaDTO;
+import jakarta.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

@@ -36,7 +36,7 @@ public class LoginIml implements LoginService {
     @Override
     public void salva(Login login) {
         try {
-            if(loginRepositorio.existePorCpf(cpfMapper.converteCpfToEntidade(login.getCpf()))){
+            if(existeCpf(login) && existeEmail(login)){
                 loginRepositorio.salvar(loginMapper.converteLoginToEntidade(login));
                 Logger.getLogger("LOGIN").info("Usuario salvo com sucesso");
             } else{
@@ -46,6 +46,14 @@ public class LoginIml implements LoginService {
             Logger.getLogger("LOGIN").info(e.getMessage());
             throw new IllegalArgumentException("Erro ao salvar usuario" + e.getMessage());
         }
+    }
+
+    private Boolean existeCpf(Login login) {
+        return loginRepositorio.existePorCpf(cpfMapper.converteCpfToEntidade(login.getCpf()));
+    }
+
+    private Boolean existeEmail(Login login) {
+        return loginRepositorio.existePorEmail(emailMapper.converteEmailToEntidade(login.getEmail()));
     }
 
     @Override

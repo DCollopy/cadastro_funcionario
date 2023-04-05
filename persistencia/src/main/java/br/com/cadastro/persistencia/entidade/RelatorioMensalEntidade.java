@@ -1,8 +1,9 @@
 package br.com.cadastro.persistencia.entidade;
 
-import lombok.Data;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+
+
 import java.time.LocalDate;
 import java.util.Set;
 

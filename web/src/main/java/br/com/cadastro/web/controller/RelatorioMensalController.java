@@ -34,6 +34,7 @@ public class RelatorioMensalController {
         return ResponseEntity.ok().build();
     }
 
+
     @PostMapping
     public ResponseEntity<RelatorioMensal> criaRelatorioMensal(@RequestBody String cpf) {
         relatorioMensalService.criaRelatorioMensal(cpf);

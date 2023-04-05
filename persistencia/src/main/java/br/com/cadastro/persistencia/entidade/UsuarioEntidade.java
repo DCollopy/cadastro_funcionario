@@ -1,11 +1,12 @@
 package br.com.cadastro.persistencia.entidade;
 
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Table;
 import lombok.Data;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
+
 
 @MappedSuperclass
 @Data

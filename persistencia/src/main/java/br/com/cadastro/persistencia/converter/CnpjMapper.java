@@ -1,5 +1,6 @@
 package br.com.cadastro.persistencia.converter;
 
+
 import br.com.cadastro.dominio.entidade.objetos.Cnpj;
 import br.com.cadastro.persistencia.entidade.CnpjEntidade;
 import lombok.RequiredArgsConstructor;

@@ -2,11 +2,12 @@ package br.com.cadastro.persistencia.repositorio;
 
 import br.com.cadastro.persistencia.entidade.AdminEntidade;
 import br.com.cadastro.persistencia.entidade.CpfEntidade;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Repository

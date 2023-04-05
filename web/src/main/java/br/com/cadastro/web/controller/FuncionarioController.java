@@ -11,11 +11,11 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -50,7 +50,7 @@ public class FuncionarioController {
         return funcionarioService.criaFuncionario(funcionario,cnpj);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/cadastro/lote/{cnpj}", consumes = {
             "multipart/form-data"
     })

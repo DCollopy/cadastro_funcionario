@@ -5,11 +5,11 @@ import br.com.cadastro.persistencia.entidade.EmpresaEntidade;
 import br.com.cadastro.persistencia.entidade.FuncionarioEntidade;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
+
 
 @Repository
 public class EmpresaRepositorio {

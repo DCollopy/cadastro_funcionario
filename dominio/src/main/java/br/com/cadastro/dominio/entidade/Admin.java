@@ -22,6 +22,10 @@ public class Admin extends Usuario {
         this.cnpj = cnpj;
     }
 
+    public Admin() {
+        super();
+    }
+
     @Override
     public String getCargo(String cargo) {
         return this.cargo;

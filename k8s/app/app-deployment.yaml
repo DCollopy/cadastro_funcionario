@@ -20,6 +20,7 @@ spec:
           image: damariscollopy/java:v1
           ports:
             - containerPort: 8080
+            - containerPort: 8082
           env:   # Setting Environmental Variables
             - name: DB_HOST   # Setting Database host address
               value: mysql
@@ -29,6 +30,17 @@ spec:
               value: root
             - name: DB_PASSWORD # Setting Database password
               value: pensealem
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+              tcpSocket:
+                port: 8080
+              initialDelaySeconds: 5
+              periodSeconds: 10
 # This seperator --- below is MANDATORY!!!
 ---
 # Define a 'Service' To Expose the application
@@ -44,3 +56,28 @@ spec:
   selector:
     app: app-java
   type: LoadBalancer
+# This seperator --- below is MANDATORY!!!
+---
+# Define a 'Service' To Expose the application
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - metrics
+  prometheus:
+    image: prom/prometheus:v2.37.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+      - D:\cadastro_funcionario\cadastro_funcionario\web\src\main\resources\grafana-prometheus\prometheus\:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - metrics
+networks:
+  metrics:
+

@@ -1,9 +1,10 @@
 package br.com.cadastro.persistencia.entidade;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Table;
 import lombok.Data;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Table;
+
 import java.io.Serializable;
 
 @Embeddable

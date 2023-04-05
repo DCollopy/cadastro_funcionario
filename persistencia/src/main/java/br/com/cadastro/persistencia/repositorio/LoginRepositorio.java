@@ -3,11 +3,11 @@ package br.com.cadastro.persistencia.repositorio;
 import br.com.cadastro.persistencia.entidade.CpfEntidade;
 import br.com.cadastro.persistencia.entidade.EmailEntidade;
 import br.com.cadastro.persistencia.entidade.LoginEntidade;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Repository
 public class LoginRepositorio{
@@ -47,6 +47,12 @@ public class LoginRepositorio{
     public Boolean existePorCpf(CpfEntidade cpf) {
         return entityManager.createQuery("select f from LoginEntidade f where f.cpf = :cpf", LoginEntidade.class)
                 .setParameter("cpf", cpf)
+                .getResultList().isEmpty();
+    }
+
+    public Boolean existePorEmail(EmailEntidade email) {
+        return entityManager.createQuery("select f from LoginEntidade f where f.email = :email", LoginEntidade.class)
+                .setParameter("email", email)
                 .getResultList().isEmpty();
     }
 

@@ -19,13 +19,11 @@ public class UsuarioDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Login login = loginService.buscaPorEmail(email);
+
         String role;
         if(login == null){
             throw new UsernameNotFoundException("Usuario não existe");
         }
-        role = login.getCargo();
-
-
         return UserPrincipal.cadastra(login);
     }
 }

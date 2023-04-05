@@ -1,7 +1,9 @@
 package br.com.cadastro.persistencia.entidade;
 
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;

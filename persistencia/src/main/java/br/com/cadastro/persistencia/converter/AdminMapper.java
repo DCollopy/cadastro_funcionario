@@ -1,5 +1,7 @@
 package br.com.cadastro.persistencia.converter;
 
+
+
 import br.com.cadastro.dominio.entidade.Admin;
 import br.com.cadastro.persistencia.entidade.AdminEntidade;
 import lombok.RequiredArgsConstructor;

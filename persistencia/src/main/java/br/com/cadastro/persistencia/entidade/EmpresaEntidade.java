@@ -1,9 +1,11 @@
 package br.com.cadastro.persistencia.entidade;
 
-import lombok.Data;
-import lombok.ToString;
 
-import javax.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.Set;
 
 @Entity
