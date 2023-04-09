@@ -5,6 +5,7 @@ import br.com.cadastro.dominio.entidade.objetos.Cpf;
 import br.com.cadastro.dominio.entidade.objetos.Email;
 import br.com.cadastro.dominio.entidade.service.LoginService;
 import br.com.cadastro.web.converte.LoginMapperWeb;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/login")
+@SecurityRequirement(name = "login")
 public class LoginController {
 
     private final LoginService loginService;

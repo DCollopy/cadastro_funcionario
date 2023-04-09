@@ -50,25 +50,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                         //authorize.anyRequest().authenticated()
                         .requestMatchers("/api/login/**").permitAll()
-                                .requestMatchers("/swagger-resources/**").permitAll()
-                                .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers("/v3/api-docs/**").permitAll()
-                                .requestMatchers("/webjars/**").permitAll()
-                                .anyRequest().authenticated();
+                                .anyRequest().authenticated().and().formLogin().permitAll();
         return http.build();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .requestMatchers("/api/auth/**")
-                .requestMatchers("/v3/api-docs/**")
-                .requestMatchers("configuration/**")
-                .requestMatchers("/swagger*/**")
-                .requestMatchers("/webjars/**")
-                .requestMatchers("/swagger-ui/**")
-                .requestMatchers("/swagger-ui.html");
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring()
+//                .requestMatchers("/api/auth/**")
+//                .requestMatchers("/v3/api-docs/**")
+//                .requestMatchers("configuration/**")
+//                .requestMatchers("/swagger*/**")
+//                .requestMatchers("/webjars/**")
+//                .requestMatchers("/swagger-ui/**")
+//                .requestMatchers("/swagger-ui.html");
+//    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -80,4 +76,5 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 }
