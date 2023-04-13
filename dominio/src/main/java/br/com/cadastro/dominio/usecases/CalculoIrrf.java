@@ -25,7 +25,8 @@ public class CalculoIrrf implements ICaculoIrrf {
             imposto = (salarioBruto * irrf_tabela4) - irrf_taxa4;
         }
 
-        BigDecimal bd = new BigDecimal(imposto).setScale(3, RoundingMode.HALF_EVEN);
+        //BigDecimal bd = new BigDecimal(imposto).setScale(3, RoundingMode.HALF_EVEN);
+        BigDecimal bd = BigDecimal.valueOf(imposto).setScale(3, RoundingMode.HALF_EVEN);
         return bd.doubleValue();
     }
 

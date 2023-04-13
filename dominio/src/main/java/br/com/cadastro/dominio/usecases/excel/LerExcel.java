@@ -23,11 +23,10 @@ public class LerExcel implements ILerExcel {
      @Override
      public  List<Funcionario> leituraExcel(String file) throws IOException {
           List<Funcionario> listaFuncionario = new ArrayList<>();
-
-          if(file != null && file.contains(".xlsx")) {
-
-               FileInputStream fileInputStream = new FileInputStream(file);
-               Workbook workbook = new XSSFWorkbook(fileInputStream);
+          if(file == null && !file.contains(".xlsx")) Logger.getLogger("Erro ao ler o arquivo");
+          FileInputStream fileInputStream = new FileInputStream(file);
+          Workbook workbook = new XSSFWorkbook(fileInputStream);
+          try {
                // Aba da planilha
                Sheet sheet = workbook.getSheetAt(0);
 
@@ -59,29 +58,28 @@ public class LerExcel implements ILerExcel {
                          listaFuncionario.add(funcionario);
                     }
                });
+          } catch (Exception e) {
+               Logger.getLogger("Erro ao ler o arquivo" + e.getMessage());
+          } finally {
                workbook.close();
                fileInputStream.close();
-               return listaFuncionario;
           }
-          Logger.getLogger("Arquivo Funcionario").info("Arquivo inválido");
-          throw new IOException("Arquivo inválido");
+          return listaFuncionario;
      }
 
      @Override
      public  List<Admin> leituraExcelAdmin(String file) throws IOException {
           List<Admin> listaAdmin = new ArrayList<>();
 
-          if(file != null && file.contains(".xlsx")) {
-
-               FileInputStream fileInputStream = new FileInputStream(file);
-               Workbook workbook = new XSSFWorkbook(fileInputStream);
+          if(file == null && !file.contains(".xlsx")) throw new IOException("Arquivo inválido");
+          FileInputStream fileInputStream = new FileInputStream(file);
+          Workbook workbook = new XSSFWorkbook(fileInputStream);
+          try {
                // Aba da planilha
                Sheet sheet = workbook.getSheetAt(0);
-
                List<Row> rowIterator = (List<Row>) toList(sheet.iterator());
                // Remove o cabeçalho
                rowIterator.remove(0);
-
                rowIterator.forEach( row -> {
                     List<Cell> cells = (List<Cell>) toList(row.cellIterator());
                     if(getStringCellValue(row,0) != null) {
@@ -101,24 +99,25 @@ public class LerExcel implements ILerExcel {
                          listaAdmin.add(admin);
                     }
                });
+          }catch (Exception e) {
+               Logger.getLogger("Erro ao ler o arquivo" + e.getMessage());
+          }finally {
                workbook.close();
                fileInputStream.close();
-               return listaAdmin;
           }
-          Logger.getLogger("Arquivo Admin").info("Arquivo inválido");
-          throw new IOException("Arquivo inválido");
+          return listaAdmin;
      }
 
      public  List<Empresa> leituraExcelEmpresa(String file) throws IOException {
           List<Empresa> listaEmpresa = new ArrayList<>();
 
-          if(file != null && file.contains(".xlsx")) {
+          if(file == null && !file.contains(".xlsx")) throw new IOException("Arquivo inválido");
 
-               FileInputStream fileInputStream = new FileInputStream(file);
-               Workbook workbook = new XSSFWorkbook(fileInputStream);
-               // Aba da planilha
+          FileInputStream fileInputStream = new FileInputStream(file);
+          Workbook workbook = new XSSFWorkbook(fileInputStream);
+
+          try{
                Sheet sheet = workbook.getSheetAt(0);
-
                List<Row> rowIterator = (List<Row>) toList(sheet.iterator());
                // Remove o cabeçalho
                rowIterator.remove(0);
@@ -134,12 +133,12 @@ public class LerExcel implements ILerExcel {
                          listaEmpresa.add(empresa);
                     }
                });
-               workbook.close();
+          }catch (Exception e) {
+               Logger.getLogger("Erro ao ler o arquivo" + e.getMessage());
+          }finally { workbook.close();
                fileInputStream.close();
-               return listaEmpresa;
           }
-          Logger.getLogger("Arquivo Empresa").info("Arquivo inválido");
-          throw new IOException("Arquivo inválido");
+          return listaEmpresa;
      }
 
      public List<?> toList(Iterator<?> iterator){

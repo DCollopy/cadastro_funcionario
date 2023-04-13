@@ -29,7 +29,8 @@ public class CalculoInss implements ICalculoInss {
             inss = (valor * inss_tabela4) + inss_deducao1 + inss_deducao2 + inss_deducao3;
         }
 
-        BigDecimal bd = new BigDecimal(inss).setScale(3, RoundingMode.HALF_EVEN);
+        //BigDecimal bd = new BigDecimal(inss).setScale(3, RoundingMode.HALF_EVEN);
+        BigDecimal bd = BigDecimal.valueOf(inss).setScale(3, RoundingMode.HALF_EVEN);
         return bd.doubleValue();
     }
 
