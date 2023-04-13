@@ -26,44 +26,54 @@ public class LerExcel implements ILerExcel {
      public  List<Funcionario> leituraExcel(String file) throws IOException {
           List<Funcionario> listaFuncionario = new ArrayList<>();
 
-          if(file != null && file.contains(".xlsx")) {
+          OutputStream stream = null;
+          try {
+               stream = new FileOutputStream("myfile.txt");
 
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    Workbook workbook = new XSSFWorkbook(fileInputStream);
-                    // Aba da planilha
-                    Sheet sheet = workbook.getSheetAt(0);
-
-                    List<Row> rowIterator = (List<Row>) toList(sheet.iterator());
-                    // Remove o cabeçalho
-                    rowIterator.remove(0);
-
-                    rowIterator.forEach( row -> {
-                         List<Cell> cells = (List<Cell>) toList(row.cellIterator());
-                         if(getStringCellValue(row,0) != null) {
-                              Funcionario funcionario = Funcionario.builder()
-                                      .nome(cells.get(0).getStringCellValue())
-                                      .sobrenome(cells.get(1).getStringCellValue())
-                                      .cpf(new Cpf(cells.get(2).getStringCellValue()))
-                                      .email(new Email(cells.get(3).getStringCellValue()))
-                                      .telefone(new Telefone(cells.get(4).getStringCellValue(), cells.get(5).getStringCellValue()))
-                                      .endereco(new Endereco(cells.get(6).getStringCellValue()
-                                              , cells.get(7).getStringCellValue()
-                                              , cells.get(8).getStringCellValue()
-                                              , cells.get(9).getStringCellValue()
-                                              ,new Cep(cells.get(10).getStringCellValue())))
-                                      .cargo(cells.get(11).getStringCellValue())
-                                      .carteiraTrabalho(new CarteiraTrabalho(cells.get(12).getStringCellValue()))
-                                      .pis(new Pis(cells.get(13).getStringCellValue()))
-                                      .salario_bruto(new Salario(cells.get(14).getNumericCellValue()))
-                                      .dependentes((int) cells.get(15).getNumericCellValue())
-                                      .data_admissao(cells.get(16).getDateCellValue().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate())
-                                      .build();
-                              listaFuncionario.add(funcionario);
-                         }
-                    });
+          } catch (Exception e) {
+               // ...
+          } finally {
+               stream.close();
           }
-          Logger.getLogger("Arquivo Funcionario").info("Arquivo inválido");
-          throw new IOException("Arquivo inválido");
+          return listaFuncionario;
+//          if(file != null && file.contains(".xlsx")) {
+//
+//                    FileInputStream fileInputStream = new FileInputStream(file);
+//                    Workbook workbook = new XSSFWorkbook(fileInputStream);
+//                    // Aba da planilha
+//                    Sheet sheet = workbook.getSheetAt(0);
+//
+//                    List<Row> rowIterator = (List<Row>) toList(sheet.iterator());
+//                    // Remove o cabeçalho
+//                    rowIterator.remove(0);
+//
+//                    rowIterator.forEach( row -> {
+//                         List<Cell> cells = (List<Cell>) toList(row.cellIterator());
+//                         if(getStringCellValue(row,0) != null) {
+//                              Funcionario funcionario = Funcionario.builder()
+//                                      .nome(cells.get(0).getStringCellValue())
+//                                      .sobrenome(cells.get(1).getStringCellValue())
+//                                      .cpf(new Cpf(cells.get(2).getStringCellValue()))
+//                                      .email(new Email(cells.get(3).getStringCellValue()))
+//                                      .telefone(new Telefone(cells.get(4).getStringCellValue(), cells.get(5).getStringCellValue()))
+//                                      .endereco(new Endereco(cells.get(6).getStringCellValue()
+//                                              , cells.get(7).getStringCellValue()
+//                                              , cells.get(8).getStringCellValue()
+//                                              , cells.get(9).getStringCellValue()
+//                                              ,new Cep(cells.get(10).getStringCellValue())))
+//                                      .cargo(cells.get(11).getStringCellValue())
+//                                      .carteiraTrabalho(new CarteiraTrabalho(cells.get(12).getStringCellValue()))
+//                                      .pis(new Pis(cells.get(13).getStringCellValue()))
+//                                      .salario_bruto(new Salario(cells.get(14).getNumericCellValue()))
+//                                      .dependentes((int) cells.get(15).getNumericCellValue())
+//                                      .data_admissao(cells.get(16).getDateCellValue().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate())
+//                                      .build();
+//                              listaFuncionario.add(funcionario);
+//                         }
+//                    });
+//          }
+//          Logger.getLogger("Arquivo Funcionario").info("Arquivo inválido");
+//          throw new IOException("Arquivo inválido");
      }
 
      @Override
