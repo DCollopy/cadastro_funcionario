@@ -1,10 +1,12 @@
 package br.com.cadastro;
 
+import br.com.cadastro.dominio.entidade.Funcionario;
 import br.com.cadastro.dominio.usecases.excel.LerExcel;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +20,8 @@ class LerExcelTest {
     @Test
     void leituraExcel() throws IOException {
         fileLocation = new File("src/test/java/br/com/cadastro/teste/" + FILE_NAME).getAbsolutePath();
-        assertNotNull(lerExcel.leituraExcel(fileLocation));
+        List<Funcionario> funcionarios = lerExcel.leituraExcel(fileLocation);
+        assertNotNull(funcionarios);
     }
 
     @Test
